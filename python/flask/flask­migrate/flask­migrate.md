@@ -28,7 +28,6 @@ if __name__ == '__main__':
 ```python
 from flask import Flask
 from blueprint import register_blueprints
-from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__, static_url_path='')
@@ -38,7 +37,6 @@ db = SQLAlchemy(app)
 db.init_app(app)
 register_blueprints(app)
 
-manager = Manager(app=app)
 if __name__ == '__main__':
     app.run()
 ```
