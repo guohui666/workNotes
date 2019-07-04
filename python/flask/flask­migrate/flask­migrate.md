@@ -3,8 +3,6 @@
 - #### `安装flask-migrate`
 ```pip install flask-migrate```
 
-安装完成后在项目中会生成 `migrations` 文件夹，可以对flask-migrate做相应的配置
-
 - #### `将数据库模型交给flask-migrate管理`
 
 `manager.py`
@@ -44,3 +42,8 @@ manager = Manager(app=app)
 if __name__ == '__main__':
     app.run()
 ```
+- #### `初始化flask-migrate`
+1. 执行`python manager.py db init`初始化flask-migrate，项目中会生成 `migrations` 文件夹，可以对flask-migrate做相应的配置，此命令只需要运行一次
+2. 执行`python manager.py db migrate`生成迁移文件，可以在`migrations`中的`versions`文件夹下看到此次生成的迁移文件，打开后可查看此次模型的修改情况，每当模型有更改的时候就需要执行一次本命令
+3. 执行`python manager.py db upgrade`将迁移文件所描述的更改同步到数据库中，每次需要同步时都需要执行一次此命令，在此之前需要执行`python manager.py db migrate`
+
