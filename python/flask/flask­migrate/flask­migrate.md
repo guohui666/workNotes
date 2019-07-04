@@ -45,3 +45,22 @@ if __name__ == '__main__':
 2. 执行`python manager.py db migrate`生成迁移文件，可以在`migrations`中的`versions`文件夹下看到此次生成的迁移文件，打开后可查看此次模型的修改情况，每当模型有更改的时候就需要执行一次本命令
 3. 执行`python manager.py db upgrade`将迁移文件所描述的更改同步到数据库中，每次需要同步时都需要执行一次此命令，在此之前需要执行`python manager.py db migrate`
 
+- #### `配置检测字段更改`
+
+在`migrations`下的env.py中添加以下配置
+
+```python
+compare_type=True,  # 检查字段类型
+compare_server_default=True  # 比较默认值
+
+#最终变为
+context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            process_revision_directives=process_revision_directives,
+            **current_app.extensions['migrate'].configure_args,
+            compare_type=True,  # 检查字段类型
+            compare_server_default=True  # 比较默认值
+)
+```
+
